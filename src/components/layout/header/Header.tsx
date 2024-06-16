@@ -17,6 +17,8 @@ import { RouterEnums } from "../../../routes/routesEnums/RouterEnums";
 import Symbol from "../../../assets/img/flag-gerb-kk 1.png";
 import map from "../../../assets/svg/map.svg";
 import global from "../../../assets/svg/global.svg";
+import { NavArray } from "../../../db/data";
+import NavMenu from "../../menu/NavMenu";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -63,75 +65,20 @@ function Header() {
       <Toolbar className="bg-white flex gap-10 py-2">
         <img src={Symbol} alt="symbol" />
         <List className="flex gap-5  w-full text-almost-menu-text-blue">
-          <ListItem className="!p-0 !text-end">
-            <ListItemText
-              primary={
-                <Typography
-                  variant="body1"
-                  className="!font-bold cursor-pointer"
-                >
-                  Хокимият
-                </Typography>
-              }
-            />
-          </ListItem>
-          <ListItem className="!p-0 !text-end">
-            <ListItemText
-              primary={
-                <Typography
-                  variant="body1"
-                  className="!font-bold cursor-pointer"
-                >
-                  Деятельность
-                </Typography>
-              }
-            />
-          </ListItem>
-          <ListItem className="!p-0 !text-end">
-            <ListItemText
-              primary={
-                <Typography
-                  variant="body1"
-                  className="!font-bold cursor-pointer"
-                >
-                  Интерактивные услуги
-                </Typography>
-              }
-            />
-          </ListItem>
-          <ListItem className="!p-0 !text-end">
-            <ListItemText
-              primary={
-                <Typography
-                  variant="body1"
-                  className="!font-bold cursor-pointer"
-                >
-                  Открытые данные
-                </Typography>
-              }
-            />
-          </ListItem>
-          <ListItem className="!p-0 !text-end">
-            <ListItemText
-              primary={
-                <Typography
-                  variant="body1"
-                  className="!font-bold cursor-pointer"
-                >
-                  Пресс Служба
-                </Typography>
-              }
-            />
-          </ListItem>
-          <ListItem className="!p-0 !text-end">
-            <ListItemText
-              primary={
-                <Typography variant="body1" className="!font-bold ">
-                  Борьба с коррупцией
-                </Typography>
-              }
-            />
-          </ListItem>
+          {NavArray.map((item) => (
+            <ListItem className="!p-0 !text-end">
+              <ListItemText
+                primary={
+                  <Typography
+                    variant="body1"
+                    className="!font-bold cursor-pointer"
+                  >
+                    <NavMenu item={item} />
+                  </Typography>
+                }
+              />
+            </ListItem>
+          ))}
         </List>
       </Toolbar>
     </AppBar>
