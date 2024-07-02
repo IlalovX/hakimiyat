@@ -1,6 +1,8 @@
 import { Box, Menu, MenuItem } from "@mui/material";
 import { Nav } from "../../db/data";
 import { useState } from "react";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 function NavMenu({ item }: { item: Nav }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -13,7 +15,11 @@ function NavMenu({ item }: { item: Nav }) {
   };
   return (
     <Box>
-      <span onClick={handleClick}>{item.title}</span>
+      <span onClick={handleClick}>
+        {item.title}
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </span>
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

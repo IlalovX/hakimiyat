@@ -1,86 +1,115 @@
 import {
   AppBar,
   Toolbar,
-  Button,
-  Menu,
-  MenuItem,
   Box,
   List,
   ListItem,
   ListItemText,
+  Divider,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { RouterConsts } from "../../../routes/routesConsts/RouterConsts";
-import { RouterEnums } from "../../../routes/routesEnums/RouterEnums";
-import Symbol from "../../../assets/img/flag-gerb-kk 1.png";
-import map from "../../../assets/svg/map.svg";
-import global from "../../../assets/svg/global.svg";
+import symbol from "../../../assets/img/useful-links/002.png";
+import phone from "../../../assets/img/phone_icon.png";
 import { NavArray } from "../../../db/data";
 import NavMenu from "../../menu/NavMenu";
-
+import MuiSwitch from "../../switch/MuiSwitch";
+import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
 function Header() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
-    <AppBar className="!flex-col" position="static">
-      <Toolbar className=" justify-end gap-5 bg-almost-menu-bg-blue ">
-        <Box className="flex gap-2 items-center">
-          <img src={map} alt="map" className="w-6 h-6" />
-          <NavLink
-            to={RouterConsts[RouterEnums.MAIN]}
-            className="text-lg font-bold"
-          >
-            Карта сайта
-          </NavLink>
-        </Box>
-        <Button
-          onClick={handleClick}
-          className="flex items-center gap-2 !text-white !normal-case !text-lg !font-bold"
-        >
-          <img src={global} alt="global" className="w-6 h-6" />
-          Язык
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem onClick={handleClose}>Русский</MenuItem>
-          <MenuItem onClick={handleClose}>Узбекский</MenuItem>
-          <MenuItem onClick={handleClose}>Каракалпакский</MenuItem>
-        </Menu>
-      </Toolbar>
-      <Toolbar className="bg-white flex gap-10 py-2">
-        <img src={Symbol} alt="symbol" />
-        <List className="flex gap-5  w-full text-almost-menu-text-blue">
-          {NavArray.map((item) => (
-            <ListItem className="!p-0 !text-end">
-              <ListItemText
-                primary={
-                  <Typography
-                    variant="body1"
-                    className="!font-bold cursor-pointer"
-                  >
-                    <NavMenu item={item} />
-                  </Typography>
-                }
-              />
+    <AppBar position="static">
+      <Box className="!w-full">
+        <Toolbar className="flex !items-center !justify-between ">
+          <List className="flex gap-2">
+            <ListItem>
+              <ListItemText className="text-nowrap">
+                Государственные символы
+              </ListItemText>
             </ListItem>
-          ))}
-        </List>
-      </Toolbar>
+            <ListItem>
+              <ListItemText className="text-nowrap">Карта сайта</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText className="text-nowrap">
+                Отправить обращение
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText className="text-nowrap">Eski sayt</ListItemText>
+            </ListItem>
+          </List>
+          <List className="flex gap-2">
+            <ListItem>
+              <ListItemText>Каракалпакский</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>Узбекский</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>Русский</ListItemText>
+            </ListItem>
+          </List>
+          <Typography variant="body1" className="text-white">
+            2024, 26 June 2:10:10 PM
+          </Typography>
+        </Toolbar>
+      </Box>
+      <Box className="!w-full !bg-white text-black">
+        <Toolbar className="!flex-col">
+          <Box className="flex items-center justify-between  !w-full">
+            <div className="flex gap-5 items-center">
+              <img src={symbol} className="w-28 h-28" />
+              <div>
+                <Typography variant="h5" className="text-left">
+                  Республика <br /> Каракалпакстан
+                </Typography>
+                <Typography variant="h6" className="text-nowrap">
+                  Хокимият города Нукуса
+                </Typography>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="flex space-x-3 border-r-4 pr-5">
+                <Divider orientation="vertical" variant="middle" flexItem>
+                  <img src={phone} className="w-6 h-6" />
+                </Divider>
+                <div>
+                  <Typography variant="h5" className="uppercase font-bold">
+                    Телефоны доверия
+                  </Typography>
+                  <p>+998 61 123-45-67</p>
+                  <span>ВСЕ ТЕЛЕФОНЫ</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-center">
+                <MenuIcon className="!w-16 !h-16 text-gray-500 cursor-pointer" />
+              </div>
+            </div>
+          </Box>
+          <nav className="!w-full flex justify-between items-center space-x-40">
+            <List className="flex gap-5 !w-full ">
+              {NavArray.map((item) => (
+                <ListItem className="!p-0 ">
+                  <ListItemText
+                    primary={
+                      <Typography
+                        variant="h6"
+                        className="!font-bold cursor-pointer text-nowrap"
+                      >
+                        <NavMenu item={item} />
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+            <div className="flex items-center ">
+              <MuiSwitch />
+              <SearchIcon className="!w-9 !h-9" />
+            </div>
+          </nav>
+        </Toolbar>
+      </Box>
     </AppBar>
   );
 }
